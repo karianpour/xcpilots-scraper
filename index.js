@@ -1,0 +1,1 @@
+// ru index.js in xcontest directory
