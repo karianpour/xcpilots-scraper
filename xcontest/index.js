@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 
 // const util = require('util');
 // const fs = require('fs');

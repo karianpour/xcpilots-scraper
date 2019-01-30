@@ -5,11 +5,11 @@ const uuidv1 = require('uuid/v1');
 const database = {
   connect: async () => {
     this.db = await massive({
-      host: '127.0.0.1',
-      port: 5432,
-      database: 'xcpilots',
-      user: 'postgres',
-      password: 'hstnkayvan'
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
     });
   },
 
