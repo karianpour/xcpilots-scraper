@@ -46,6 +46,11 @@ const database = {
     return result;
   },
 
+  earliestFlight: async (scope) => {
+    const result = await this.db.query(`select min(flight_date) as earliest_flight from flights where scope = '${scope}'`);
+    return result[0]['earliest_flight'];
+  },
+
   latestFlight: async (scope) => {
     const result = await this.db.query(`select max(flight_date) as latest_flight from flights where scope = '${scope}'`);
     return result[0]['latest_flight'];
