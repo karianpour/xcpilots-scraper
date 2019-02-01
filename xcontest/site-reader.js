@@ -63,13 +63,13 @@ async function scrapXContext(address){
 }
 
 function yesterday(){
-  const date = new Date();
-  date.setDate(date.getDate() - 1);
+  let date = new Date();
+  date = new Date(date.getTime() - 1 * 24 * 60 * 60 * 1000);
   return date.toISOString().substr(0, 10);
 }
 
 function lastWeek(date){
-  date.setDate(date.getDate() - 7);
+  date = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
   return date.toISOString().substr(0, 10);
 }
 

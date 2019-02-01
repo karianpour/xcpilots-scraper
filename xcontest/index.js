@@ -7,6 +7,9 @@ const reader = require('./flight-reader');
 const {database} = require('./flight-saver');
 const {scrapXContextForDaily, scrapXContextForCircle, scrapXContext} = require('./site-reader');
 
+
+const WORLD_SCOPE = 'WRLD';
+
 const circles = [
   {scope: 'IR1', lat: 37.982681,  lon: 46.608398, radius: 200000},
   {scope: 'IR2', lat: 34.988990,  lon: 47.399414, radius: 200000},
@@ -32,8 +35,8 @@ async function main(){
   await database.connect();
   // const html = await readFile('./samples/xcontest.txt', 'utf8');
 
+  await scrapIran();
   await scrapDaily();
-  // await scrapIran();
 
   console.log('finished');
 }
@@ -45,14 +48,19 @@ async function scrapIran(){
 }
 
 async function scrapDaily(){
-  for(let i=0; i<10; i++){
-    const date = new Date();
-    date.setDate(date.getDate() - i);
+  const latestFlightDate = await database.latestFlight(WORLD_SCOPE);
+
+  const now = new Date();
+  let date = !!latestFlightDate ? latestFlightDate : now;
+
+  date = new Date(date.getTime() - 5 * 24 * 60 * 60 * 1000);
+
+  while(date.getTime() < now.getTime()){
     const toScrap = date.toISOString().substr(0, 10);
 
     const html = await scrapXContextForDaily(toScrap);
 
-    const pageData = await reader.readPageDataDaily('WRLD', html);
+    const pageData = await reader.readPageDataDaily(WORLD_SCOPE, html);
 
     const promises = pageData.flights.map(async flight => {
       return database.saveFlight(flight);
@@ -60,6 +68,7 @@ async function scrapDaily(){
 
     await Promise.all(promises);
 
+    date = new Date(date.getTime() + 1 * 24 * 60 * 60 * 1000);
   }
 }
 
