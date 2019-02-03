@@ -77,7 +77,7 @@ function readPageDataDaily(scope, json){
 }
 
 function readFlightDaily(item){
-  const flight_id = 'fligh-'+item.id;
+  const flight_id = 'flight-'+item.id;
   const flight_date = new Date(item.pointStart.time);
   const utcOffset = item.utcOffsetStart / 60;
   const pilot_country = item.pilot.countryIso;
