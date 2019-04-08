@@ -91,7 +91,7 @@ async function scrapForCircle(circle){
 
   const latestFlightDate = await database.latestFlight(circle.scope);
 
-  console.log(latestFlightDate);
+  console.log({latestFlightDate});
 
   let address;
   do{
