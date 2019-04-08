@@ -44,7 +44,14 @@ async function main(){
 
 async function scrapIran(){
   for(let i=0; i<circles.length; i++){
-    await scrapForCircle(circles[i]);
+    for(let j=0; j<3; j++){
+      try{
+        await scrapForCircle(circles[i]);
+        break;
+      }catch(err){
+        console.error(`faild with error ${err}`);
+      }
+    }
   }
 }
 
@@ -57,19 +64,26 @@ async function scrapDaily(){
   date = new Date(date.getTime() - 5 * 24 * 60 * 60 * 1000);
 
   while(date.getTime() < now.getTime()){
-    const toScrap = date.toISOString().substr(0, 10);
+    for(let j=0; j < 3; j++){
+      try{
+        const toScrap = date.toISOString().substr(0, 10);
 
-    const html = await scrapXContextForDaily(toScrap);
+        const html = await scrapXContextForDaily(toScrap);
 
-    const pageData = await reader.readPageDataDaily(WORLD_SCOPE, html);
+        const pageData = await reader.readPageDataDaily(WORLD_SCOPE, html);
 
-    const promises = pageData.flights.map(async flight => {
-      return database.saveFlight(flight);
-    })
+        const promises = pageData.flights.map(async flight => {
+          return database.saveFlight(flight);
+        })
 
-    await Promise.all(promises);
+        await Promise.all(promises);
 
-    date = new Date(date.getTime() + 1 * 24 * 60 * 60 * 1000);
+        date = new Date(date.getTime() + 1 * 24 * 60 * 60 * 1000);
+        break;
+      }catch(err){
+        console.error(`faild with error ${err}`);
+      }
+    }
   }
 }
 
