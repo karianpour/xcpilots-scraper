@@ -28,6 +28,7 @@ const circles = [
   {scope: 'IR15', lat: 37.633446,  lon: 55.809777, radius:  70000},
   {scope: 'IR16', lat: 30.200127,  lon: 49.906627, radius:  70000},
   {scope: 'IR17', lat: 26.843686,  lon: 58.838511, radius: 200000},
+  {scope: 'IR18', lat: 29.166933,  lon: 51.34635, radius: 2000},
 ];
 // const readFile = util.promisify(fs.readFile)
 
