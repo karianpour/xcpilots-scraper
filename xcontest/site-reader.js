@@ -9,7 +9,8 @@ const encodeUrl = require('encodeurl');
 
 async function scrapXContextForCircle(lastFlightDateInDb, circle){
   const from = !!lastFlightDateInDb ? lastWeek(lastFlightDateInDb) : '2007-11-18';
-  const till = yesterday(); //'2019-01-27';
+  const till = today();
+  // const till = yesterday();
 
   const {lat, lon, radius} = circle;
 
@@ -65,6 +66,12 @@ async function scrapXContext(address){
 function yesterday(){
   let date = new Date();
   date = new Date(date.getTime() - 1 * 24 * 60 * 60 * 1000);
+  return date.toISOString().substr(0, 10);
+}
+
+function today(){
+  let date = new Date();
+  date = new Date(date.getTime());
   return date.toISOString().substr(0, 10);
 }
 
