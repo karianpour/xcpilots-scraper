@@ -9,12 +9,12 @@
   "author": "Kayvan Arianpour",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^6.2.0",
     "encodeurl": "^1.0.2",
-    "massive": "^5.7.4",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.5",
-    "uuid": "^3.3.2"
+    "massive": "^5.11.2",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8",
+    "uuid": "^3.4.0"
   }
 }
