@@ -34,6 +34,7 @@ const circles = [
 
 async function main(){
   await database.connect();
+  await database.eraseDuplicatFlights();
   // const html = await readFile('./samples/xcontest.txt', 'utf8');
 
   await scrapIran();
