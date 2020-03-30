@@ -30,7 +30,7 @@ async function readPageData(scope, html){
 function readFlight(flightRow){
   const flight_id = flightRow.attr('id');
   // console.log(flight_id)
-  const flight_date = convertToIsoDate(flightRow.children('td').eq(1).contents().first().get(0).nodeValue) +'T'+flightRow.children('td').eq(1).contents().last().contents().first().get(0).nodeValue;
+  const flight_date = convertToIsoDate(flightRow.find('td div.full')[0].children[0].data) +'T'+flightRow.find('td div.full em')[0].children[0].data + flightRow.find('td div.full span.XCutcOffset')[0].children[0].data.substring(3);
   const utcOffset = (new Date(flight_date)).getTimezoneOffset();
   // console.log(flight_date);
   const pilot_country = flightRow.find('td div.full span.cic').contents().first().get(0).nodeValue.trim();
