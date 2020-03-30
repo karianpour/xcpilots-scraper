@@ -107,9 +107,9 @@ const database = {
       from flights f
       inner join d on f.pilot_name = d.pilot_name and f.flight_date::date = d.flight_date::date
     )
-    delete from flights where id in (select id from b where rowno != 1);
+    delete from flights where id in (select id from b where rowno != 1) returning id;
     `);
-    return result[0]['latest_flight'];
+    return result.length;
   }
 }
 

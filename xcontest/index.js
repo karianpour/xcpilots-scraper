@@ -34,7 +34,8 @@ const circles = [
 
 async function main(){
   await database.connect();
-  await database.eraseDuplicatFlights();
+  const deletedCount = await database.eraseDuplicatFlights();
+  console.log(`duplicate flights deleted ${deletedCount}`);
   // const html = await readFile('./samples/xcontest.txt', 'utf8');
 
   await scrapIran();
